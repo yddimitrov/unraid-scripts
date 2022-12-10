@@ -44,7 +44,7 @@ control_count=$(ping -c 5 -W 3 $CONTROL | grep -c from*)
 echo "[PW-CHECK] First Check Ping Count: $check_one_count --- Second Check Ping Count: $check_two_count --- Control Ping Count: $control_count"
 
 #If the two check devices are not responding but the control device is available we are shutting down the server.
-if [ $check_one_count = 0 ] && [ $check_two_count = 0 ] && [ $control_count != 0 ]; then
+if [ $check_one_count == 0 ] && [ $check_two_count == 0 ] && [ $control_count != 0 ]; then
   echo "[PW-CHECK] Executing graceful shutdown due to missing check devices..."
   /usr/local/emhttp/webGui/scripts/notify -e "PW-CHECK Shutdown" -s "Power Outage Detected!" -d "Shutting down UnRaid Server..." -i "warning"
   sleep 60
